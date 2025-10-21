@@ -122,7 +122,7 @@
 
   <!-- Logos -->
   <section class="py-10 border-t border-neutral-900">
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-11xl mx-auto px-10">
       <p class="text-center text-neutral-400 text-sm mb-6">Built by Grads & Researchers from</p>
       <div class="flex items-center justify-center opacity-90">
         <img src="/img/USC_Molinaroli_logo_horizontal_RGB_G_rev.png" 
@@ -222,34 +222,48 @@
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="py-20 border-t border-neutral-900">
-    <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-3xl font-semibold">FAQ</h2>
-      <div class="mt-8 divide-y divide-neutral-900">
-        <details class="group py-4">
-          <summary class="cursor-pointer list-none flex items-center justify-between">
-            <span class="font-medium">What is Local AI / Edge AI?</span>
-            <span class="text-neutral-400 group-open:rotate-180 transition">▾</span>
-          </summary>
-          <p class="mt-2 text-neutral-300">AI that runs on the device in your hand, not in a far away data center. Quicker answers with less energy, without compromising your privacy.</p>
-        </details>
-        <details class="group py-4">
-          <summary class="cursor-pointer list-none flex items-center justify-between">
-            <span class="font-medium">Does Zabo need Internet?</span>
-            <span class="text-neutral-400 group-open:rotate-180 transition">▾</span>
-          </summary>
-          <p class="mt-2 text-neutral-300">No. Zabo works offline, after initial setup. If you choose, it can use the web for extra context, but your private files never leave your device.</p>
-        </details>
-        <details class="group py-4">
-          <summary class="cursor-pointer list-none flex items-center justify-between">
-            <span class="font-medium">Is my data private?</span>
-            <span class="text-neutral-400 group-open:rotate-180 transition">▾</span>
-          </summary>
-          <p class="mt-2 text-neutral-300">Yes. Your data stays on your device. We don’t collect your notes, docs, or voice, nor resell any data. Period.</p>
-        </details>
+<section id="faq" class="py-20 bg-neutral-950 text-neutral-100">
+  <div class="max-w-3xl mx-auto px-6">
+    <h2 class="text-3xl font-semibold mb-10">FAQ</h2>
+
+    <div class="divide-y divide-neutral-800">
+      <!-- Item 1 -->
+      <div class="py-6">
+        <button class="flex justify-between w-full text-left text-lg font-medium focus:outline-none faq-toggle">
+          <span>What is Local AI / Edge AI?</span>
+          <span class="faq-icon text-2xl leading-none">+</span>
+        </button>
+        <div class="faq-answer mt-3 hidden text-neutral-400">
+          Local AI runs directly on your device — your laptop, phone, or embedded system — instead of a cloud data center.
+          It’s faster, private, and doesn’t rely on constant connectivity.
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="py-6">
+        <button class="flex justify-between w-full text-left text-lg font-medium focus:outline-none faq-toggle">
+          <span>Does Zabo need Internet?</span>
+          <span class="faq-icon text-2xl leading-none">+</span>
+        </button>
+        <div class="faq-answer mt-3 hidden text-neutral-400">
+          Nope. Zabo runs fully offline once installed. It processes your requests locally using the power of your device.
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="py-6">
+        <button class="flex justify-between w-full text-left text-lg font-medium focus:outline-none faq-toggle">
+          <span>Is my data private?</span>
+          <span class="faq-icon text-2xl leading-none">+</span>
+        </button>
+        <div class="faq-answer mt-3 hidden text-neutral-400">
+          100%. Your data never leaves your device. No servers, no data centers, no tracking — just your AI, locally.
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Footer -->
   <footer class="py-12 border-t border-neutral-900">
@@ -372,6 +386,25 @@
     tick();
   })();
 </script>
+
+<script>
+  document.querySelectorAll('.faq-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = !answer.classList.contains('hidden');
+
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+      document.querySelectorAll('.faq-icon').forEach(i => i.textContent = '+');
+
+      if (!isOpen) {
+        answer.classList.remove('hidden');
+        icon.textContent = '–';
+      }
+    });
+  });
+</script>
+
 
 </body>
 </html>
