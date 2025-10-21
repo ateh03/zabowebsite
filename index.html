@@ -22,9 +22,9 @@
               50:  '#FFF5EB',
               100: '#FFE7D3',
               200: '#FFC59E',
-              300: '#FFB46E',   /* light accent */
+              300: '#FFB46E',
               400: '#FF8A33',
-              500: '#FF6C11',   /* Ember primary */
+              500: '#FF6C11',
               600: '#E55E0F',
               700: '#C04C00',
               800: '#8A3600',
@@ -35,29 +35,23 @@
             glow: '0 0 0 6px rgba(255,108,17,0.12), 0 10px 30px rgba(0,0,0,0.25)',
             ember: '0 8px 30px rgba(255,108,17,0.35)'
           },
-          borderRadius: {
-            '2xl': '1.25rem'
-          }
+          borderRadius: { '2xl': '1.25rem' }
         }
       }
     }
   </script>
   <style>
-    .grad {
+    .grad{
       background:
         radial-gradient(1000px 600px at 20% -10%, rgba(255,108,17,.22), transparent),
         radial-gradient(800px 500px at 90% 10%, rgba(255,180,110,.08), transparent);
     }
-    .glass {
-      backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border: 1px solid rgba(255,255,255,.12);
-    }
-    .bronze { border: 1px solid rgba(255,108,17,.18); box-shadow: 0 0 40px rgba(255,108,17,.12) inset; }
-    .accent { color: #FFB46E; font-weight: 700; }  /* light orange emphasis */
-    /* Terminal cursor */
-    #zaboTerminal::after { content: '▌'; animation: blink 1s infinite; color: #FF6C11; }
-    @keyframes blink { 50% { opacity: 0; } }
+    .glass{backdrop-filter:blur(10px);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12)}
+    .bronze{border:1px solid rgba(255,108,17,.18);box-shadow:0 0 40px rgba(255,108,17,.12) inset}
+    .accent{color:#FFB46E;font-weight:700}
+    /* blinking caret on the live line only */
+    #zaboTerminal[data-caret="true"]::after{content:'▌';animation:blink 1s steps(1,end) infinite;color:#FF6C11}
+    @keyframes blink{50%{opacity:0}}
   </style>
 </head>
 <body class="bg-neutral-950 text-neutral-100 selection:bg-zabo-500 selection:text-white">
@@ -97,6 +91,7 @@
           <div class="mt-6 text-neutral-400 text-sm">Works without Wi-Fi. Private by default. <strong>No data centers.</strong></div>
         </div>
 
+        <!-- Terminal Card -->
         <div class="relative">
           <div class="glass bronze rounded-2xl p-6">
             <div class="flex items-center justify-between mb-4 text-xs text-neutral-400">
@@ -104,7 +99,7 @@
               <span>Preview</span>
             </div>
             <!-- Animated Terminal Demo -->
-            <div class="bg-neutral-900 rounded-xl p-4 min-h-[260px] font-mono text-sm leading-relaxed overflow-hidden relative">
+            <div id="terminalWrap" class="bg-neutral-900 rounded-xl p-4 h-64 font-mono text-sm leading-relaxed overflow-auto relative">
               <pre id="zaboTerminal" class="text-neutral-200 whitespace-pre-wrap"></pre>
             </div>
             <div class="mt-4 grid grid-cols-3 gap-3 text-xs">
@@ -114,78 +109,50 @@
             </div>
           </div>
         </div>
+        <!-- /Terminal Card -->
       </div>
     </div>
   </section>
 
-  <!-- Logos / social proof -->
+  <!-- Logos -->
   <section class="py-10 border-t border-neutral-900">
     <div class="max-w-7xl mx-auto px-6">
       <p class="text-center text-neutral-400 text-sm mb-6">Built by grads & researchers from</p>
       <div class="flex items-center justify-center opacity-90">
-        <!-- Replace with your hosted UofSC asset -->
         <img src="/images/uofsc-wordmark.svg" alt="University of South Carolina" class="h-10 w-auto" />
       </div>
     </div>
   </section>
 
-  <!-- Why Zabo (3 reasons) -->
+  <!-- Why -->
   <section id="features" class="py-20">
     <div class="max-w-7xl mx-auto px-6">
       <h2 class="text-3xl font-semibold">Why people choose Zabo</h2>
       <p class="mt-2 text-neutral-400">Simple idea: keep the brains on your device.</p>
 
       <div class="mt-10 grid md:grid-cols-3 gap-6">
-        <div class="glass rounded-2xl p-6">
-          <h3 class="font-semibold">Fast</h3>
-          <p class="mt-2 text-neutral-300">Instant answers and smooth voice without trips to the cloud.</p>
-        </div>
-        <div class="glass rounded-2xl p-6">
-          <h3 class="font-semibold">Private</h3>
-          <p class="mt-2 text-neutral-300">Your files stay with you. Zabo can read local docs (with permission) and never uploads them.</p>
-        </div>
-        <div class="glass rounded-2xl p-6">
-          <h3 class="font-semibold">Clean</h3>
-          <p class="mt-2 text-neutral-300">Avoid energy-hungry data centers. Local AI uses less bandwidth and power.</p>
-        </div>
+        <div class="glass rounded-2xl p-6"><h3 class="font-semibold">Fast</h3><p class="mt-2 text-neutral-300">Instant answers and smooth voice without trips to the cloud.</p></div>
+        <div class="glass rounded-2xl p-6"><h3 class="font-semibold">Private</h3><p class="mt-2 text-neutral-300">Your files stay with you. Zabo can read local docs (with permission) and never uploads them.</p></div>
+        <div class="glass rounded-2xl p-6"><h3 class="font-semibold">Clean</h3><p class="mt-2 text-neutral-300">Avoid energy-hungry data centers. Local AI uses less bandwidth and power.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- What you can do (3 B2C + 3 B2B) -->
+  <!-- Use cases -->
   <section id="use-cases" class="py-20 border-t border-neutral-900">
     <div class="max-w-7xl mx-auto px-6">
       <h2 class="text-3xl font-semibold">What can I use Zabo for?</h2>
-
       <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- B2C -->
         <div class="glass rounded-2xl p-6 ring-1 ring-zabo-500/40 relative">
           <span class="absolute -top-3 left-4 text-[10px] uppercase tracking-wider bg-zabo-500 text-white px-2 py-1 rounded">Popular!</span>
           <h3 class="font-semibold text-zabo-300">Offline AI Chatbot</h3>
           <p class="mt-2 text-neutral-300">A full-featured assistant that never leaves your device. Daily Q&A, summaries, planning — even with no signal.</p>
         </div>
-        <div class="glass rounded-2xl p-6">
-          <h3 class="font-semibold">Travel & Study</h3>
-          <p class="mt-2 text-neutral-300">Translate, transcribe, and organize notes or PDFs without Wi-Fi.</p>
-        </div>
-        <div class="glass rounded-2xl p-6">
-          <h3 class="font-semibold">In Your Apps</h3>
-          <p class="mt-2 text-neutral-300">Drop-in assistants for notes, email, photos, and games — powered locally.</p>
-        </div>
-
-        <!-- B2B -->
-        <div class="glass rounded-2xl p-6">
-          <h3 class="font-semibold">Work & School</h3>
-          <p class="mt-2 text-neutral-300">Keep company and student data off the cloud while staying productive.</p>
-        </div>
-        <div class="glass rounded-2xl p-6">
-          <h3 class="font-semibold">Edge Apps & Kiosks</h3>
-          <p class="mt-2 text-neutral-300">Vision and voice on devices and sensors with no server dependency.</p>
-        </div>
-        <div class="glass rounded-2xl p-6">
-          <h3 class="font-semibold">Developer Extensions</h3>
-          <p class="mt-2 text-neutral-300">Add local tools and skills — one SDK for iOS, Android, Windows, macOS.</p>
-        </div>
+        <div class="glass rounded-2xl p-6"><h3 class="font-semibold">Travel & Study</h3><p class="mt-2 text-neutral-300">Translate, transcribe, and organize notes or PDFs without Wi-Fi.</p></div>
+        <div class="glass rounded-2xl p-6"><h3 class="font-semibold">In Your Apps</h3><p class="mt-2 text-neutral-300">Drop-in assistants for notes, email, photos, and games — powered locally.</p></div>
+        <div class="glass rounded-2xl p-6"><h3 class="font-semibold">Work & School</h3><p class="mt-2 text-neutral-300">Keep company and student data off the cloud while staying productive.</p></div>
+        <div class="glass rounded-2xl p-6"><h3 class="font-semibold">Edge Apps & Kiosks</h3><p class="mt-2 text-neutral-300">Vision and voice on devices and sensors with no server dependency.</p></div>
+        <div class="glass rounded-2xl p-6"><h3 class="font-semibold">Developer Extensions</h3><p class="mt-2 text-neutral-300">Add local tools and skills — one SDK for iOS, Android, Windows, macOS.</p></div>
       </div>
     </div>
   </section>
@@ -199,12 +166,10 @@
       <div class="mt-10 grid md:grid-cols-3 gap-6">
         <div class="glass rounded-2xl p-6">
           <h3 class="font-semibold text-lg">Starter</h3>
-          <p class="text-neutral-400 text-sm mt-1">Perfect for trying it out</p>
+          <p class="text-neutral-400 text-sm mt-1">Perfect for trying it out!</p>
           <div class="mt-4 text-4xl font-semibold">Free</div>
           <ul class="mt-4 text-sm text-neutral-300 space-y-2">
-            <li>Beta app download</li>
-            <li>Local AI chatbot</li>
-            <li>Community support</li>
+            <li>Beta app download</li><li>Local AI chatbot</li><li>Community support</li>
           </ul>
           <a href="#cta" class="mt-6 inline-flex px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Get started</a>
         </div>
@@ -214,9 +179,7 @@
           <p class="text-neutral-400 text-sm mt-1">Power features</p>
           <div class="mt-4 text-4xl font-semibold">$49<span class="text-base text-neutral-400">/mo</span></div>
           <ul class="mt-4 text-sm text-neutral-300 space-y-2">
-            <li>Expanded tools & memory</li>
-            <li>Early features</li>
-            <li>Priority updates</li>
+            <li>Expanded tools & memory</li><li>Early features</li><li>Priority updates</li>
           </ul>
           <a href="#cta" class="mt-6 inline-flex px-4 py-2 rounded-lg bg-zabo-500 hover:bg-zabo-600 text-white shadow-glow">Join Pro waitlist</a>
         </div>
@@ -226,9 +189,7 @@
           <p class="text-neutral-400 text-sm mt-1">For schools & orgs</p>
           <div class="mt-4 text-4xl font-semibold">Talk to us</div>
           <ul class="mt-4 text-sm text-neutral-300 space-y-2">
-            <li>Private builds</li>
-            <li>Admin controls</li>
-            <li>Security review</li>
+            <li>Customizable private builds</li><li>Admin controls</li><li>Security review</li>
           </ul>
           <a href="#cta" class="mt-6 inline-flex px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Contact</a>
         </div>
@@ -265,14 +226,14 @@
         </details>
         <details class="group py-4">
           <summary class="cursor-pointer list-none flex items-center justify-between">
-            <span class="font-medium">Does Zabo Need Internet?</span>
+            <span class="font-medium">Does Zabo need Internet?</span>
             <span class="text-neutral-400 group-open:rotate-180 transition">▾</span>
           </summary>
           <p class="mt-2 text-neutral-300">No. Zabo works offline, after initial setup. If you choose, it can use the web for extra context, but your private files never leave your device.</p>
         </details>
         <details class="group py-4">
           <summary class="cursor-pointer list-none flex items-center justify-between">
-            <span class="font-medium">Is My Data Private?</span>
+            <span class="font-medium">Is my data private?</span>
             <span class="text-neutral-400 group-open:rotate-180 transition">▾</span>
           </summary>
           <p class="mt-2 text-neutral-300">Yes. Your data stays on your device. We don’t collect your notes, docs, or voice, nor resell any data. Period.</p>
@@ -288,86 +249,120 @@
       <div class="flex items-center gap-6 text-sm">
         <a href="#" class="text-neutral-400 hover:text-neutral-200">Privacy</a>
         <a href="#" class="text-neutral-400 hover:text-neutral-200">Terms</a>
-        <a href="mailto:hello@zabo.ai" class="text-neutral-400 hover:text-neutral-200">Contact</a>
+        <a href="mailto:hello@myzabo.com" class="text-neutral-400 hover:text-neutral-200">Contact</a>
       </div>
     </div>
   </footer>
 
+  <!-- Terminal animation -->
 <script>
-(function () {
-  const term = document.getElementById("zaboTerminal");
-  const wrap = document.getElementById("terminalWrap");
-  if (!term || !wrap) return;
+  // update footer year
+  const yEl = document.getElementById('y');
+  if (yEl) yEl.textContent = new Date().getFullYear();
 
-  const convo = [
-    { u: "Summarize this PDF about clean energy.",
-      z: "Done. 2 pages • 1.3 MB read • No upload • 4.6 ms" },
-    { u: "Remind me to schedule an appointment with Dr. Z later.",
-      z: "I've set a local reminder and created a calendar event. You'll get a reminder at 8 PM." },
-    { u: "Find 'proposal.docx' in my downloads.",
-      z: "Found 1 file • Open now? • 2.1 ms lookup" }
-  ];
+  (function () {
+    const term = document.getElementById('zaboTerminal');
+    const wrap = document.getElementById('terminalWrap') || (term && term.parentElement);
+    if (!term || !wrap) return;
 
-  const USER_PREFIX = "> user: ";
-  const ZABO_PREFIX = "> zabo: ";
-  const USER_COLOR  = "#FFB46E";
-  const ZABO_COLOR  = "#FFFFFF";
+    // --- demo lines (edit as you like) ---
+    const convo = [
+      { u: "really resonating with the songs on radical optimism right now. what's the theme, and how can i apply it to this era of my life",
+        z: "It’s about finding steadiness when everything’s in motion — letting lessons land without losing your light. You’re learning to flow instead of force." },
 
-  let pairIndex = 0, isUser = true, charIndex = 0;
-  const committed = [];
+      { u: "Using what you know about my best friend Leah, what should I get her for her 21st?",
+        z: "Based on her saved photos and recent notes, Leah’s into candles, night drives, and simple gold jewelry. A weekend candle set or a dainty bracelet would land well." },
 
-  function commitLine(prefix, color, text) {
-    committed.push(`<span style="color:${color}">${prefix}${text}</span>`);
-  }
+      { u: "Summarize this PDF about clean energy.",
+        z: "Done. 2 pages • 1.3 MB read • No upload • 4.6 ms" },
 
-  function drawLive(prefix, color, textPart) {
-    const history = committed.join("\n\n");
-    const live = `<span style="color:${color}">${prefix}${textPart}</span>`;
-    term.innerHTML = (history ? history + "\n\n" : "") + live;
-    // auto-scroll to bottom
-    wrap.scrollTop = wrap.scrollHeight;
-  }
+      { u: "Find 'proposal.docx' in my downloads.",
+        z: "Found 1 file • Open now? • 2.1 ms lookup" }
+    ];
 
-  function nextTick() {
-    if (pairIndex >= convo.length) {
-      setTimeout(() => {
-        pairIndex = 0; isUser = true; charIndex = 0; committed.length = 0;
-        term.innerHTML = "";
-        wrap.scrollTop = 0;
-        nextTick();
-      }, 1500);
-      return;
-    }
+    // typing speeds
+    const USER_SPEED = 55;  // slower, like human typing
+    const ZABO_SPEED = 35;  // quicker, AI-like
 
-    const pair = convo[pairIndex];
-    const fullText = isUser ? pair.u : pair.z;
-    const prefix   = isUser ? USER_PREFIX : ZABO_PREFIX;
-    const color    = isUser ? USER_COLOR  : ZABO_COLOR;
+    const USER_PREFIX = "> user: ";
+    const ZABO_PREFIX = "> zabo: ";
+    const USER_COLOR  = "#FFB46E";
+    const ZABO_COLOR  = "#FFFFFF";
 
-    drawLive(prefix, color, fullText.slice(0, charIndex));
+    let pairIndex = 0, isUser = true, charIndex = 0;
+    const committed = [];
 
-    if (charIndex < fullText.length) {
-      charIndex++;
-      setTimeout(nextTick, 50); // typing speed (adjust this ms value)
-    } else {
-      commitLine(prefix, color, fullText);
-      wrap.scrollTop = wrap.scrollHeight;
-      charIndex = 0;
-      if (isUser) {
-        isUser = false;
-        setTimeout(nextTick, 300);
+    // prepare fade-in for Zabo replies
+    term.style.transition = 'opacity 180ms ease-out';
+    function fadeInZabo(starting) {
+      if (starting) {
+        term.style.opacity = '0.0';
+        // next frame -> 1 (trigger transition)
+        requestAnimationFrame(() => { term.style.opacity = '1'; });
       } else {
-        isUser = true;
-        pairIndex++;
-        setTimeout(nextTick, 600);
+        term.style.opacity = '1';
       }
     }
-  }
 
-  nextTick();
-})();
+    function commitLine(prefix, color, text) {
+      committed.push(`<span style="color:${color}">${prefix}${text}</span>`);
+    }
+
+    function renderLive(prefix, color, partial) {
+      const history = committed.join("\n\n");
+      const live = `<span style="color:${color}">${prefix}${partial}</span>`;
+      term.setAttribute('data-caret', 'true');
+      term.innerHTML = (history ? history + "\n\n" : "") + live;
+      wrap.scrollTop = wrap.scrollHeight; // keep newest text in view
+    }
+
+    function resetAll() {
+      pairIndex = 0; isUser = true; charIndex = 0; committed.length = 0;
+      term.removeAttribute('data-caret');
+      term.textContent = "";
+      wrap.scrollTop = 0;
+    }
+
+    function tick() {
+      if (pairIndex >= convo.length) {
+        setTimeout(() => { resetAll(); tick(); }, 1400);
+        return;
+      }
+
+      const pair = convo[pairIndex];
+      const fullText = isUser ? pair.u : pair.z;
+      const prefix   = isUser ? USER_PREFIX : ZABO_PREFIX;
+      const color    = isUser ? USER_COLOR  : ZABO_COLOR;
+
+      // apply fade-in only at the start of Zabo lines
+      if (!isUser && charIndex === 0) fadeInZabo(true);
+      if (isUser && charIndex === 0) fadeInZabo(false);
+
+      renderLive(prefix, color, fullText.slice(0, charIndex));
+
+      if (charIndex < fullText.length) {
+        charIndex++;
+        setTimeout(tick, isUser ? USER_SPEED : ZABO_SPEED);
+      } else {
+        commitLine(prefix, color, fullText);
+        term.removeAttribute('data-caret');
+        wrap.scrollTop = wrap.scrollHeight;
+        charIndex = 0;
+
+        if (isUser) {
+          isUser = false;
+          setTimeout(tick, 240);
+        } else {
+          isUser = true;
+          pairIndex++;
+          setTimeout(tick, 500);
+        }
+      }
+    }
+
+    tick();
+  })();
 </script>
-
 
 </body>
 </html>
